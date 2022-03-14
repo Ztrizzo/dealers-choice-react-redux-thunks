@@ -5,6 +5,7 @@ import Login from './Login';
 import store, {loadUsers} from './store';
 import {Provider, connect} from 'react-redux';
 import Conversations from './Conversations';
+import Conversation from './Conversation';
 
 
 class _Main extends React.Component{
@@ -37,6 +38,9 @@ class _Main extends React.Component{
       return (
         <Conversations/>
       );
+    }
+    else if(this.props.view === 'conversation'){
+      return (<Conversation/>);
     }
     
   }
