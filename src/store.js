@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware} from 'redux';
+ import {createStore, applyMiddleware} from 'redux';
 import loggerMiddleware from 'redux-logger';
 
 const CHANGE_SELECTED_USER = 'CHANGE_SELECTED_USER';
@@ -6,6 +6,7 @@ const LOAD_USERS = 'LOAD_USERS';
 const LOGIN = 'LOGIN';
 const GO_TO_CONVERSATION = 'GO_TO_CONVERSATION';
 const BACK_TO_CONVERSATIONS = 'BACK_TO_CONVERSATIONS';
+
 
 const initialState = {
   users: [],
@@ -29,6 +30,7 @@ export const backToConversations = () => {
     view: 'logged in'
   }
 }
+
 
 export const login = (selectedUser, conversations) => {
   return{
