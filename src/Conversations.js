@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { goToConversation } from './store';
+import { goToConversation , logout} from './store';
 
 const Conversations = (props) => {
   return (
     <div id='conversations'>
+      <a href='/'><button>Logout</button></a>
       <h3>Conversation with:</h3>
       {props.conversations.map((conversation) => {
         return (

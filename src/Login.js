@@ -1,13 +1,13 @@
 import React from 'react';
-import store, {changeSelectedUser, login} from './store';
+import {changeSelectedUser, login} from './store';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
 const Login = (props) => {
   return(
     <div id='login'>
         <div>Login</div>
         <select onChange={props.handleChange}>
+          <option>-- Please Select a User --</option>
           {props.users.map(user => {
             return <option key={user.id} value={user.id}>{user.name}</option>
           })}
@@ -27,10 +27,8 @@ const mapDispatchToProps = (dispatch) => {
       const user = e.target.value;
       dispatch(changeSelectedUser(user));
     },
-    login: async function(user){
-      console.log(user);
-      const conversations = (await axios.get(`/user/${user}/conversations`)).data;
-      dispatch(login(user, conversations));
+    login: function(user){
+      dispatch(login(user));
     }
 
 

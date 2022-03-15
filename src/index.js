@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import Login from './Login';
 import store, {loadUsers} from './store';
 import {Provider, connect} from 'react-redux';
@@ -19,8 +18,8 @@ class _Main extends React.Component{
   }
 
   async componentDidMount(){
-    const users = (await axios.get('/users')).data;
-    this.props.bootstrap(users);
+    
+    this.props.bootstrap();
   }
   
   // login(){
@@ -48,8 +47,8 @@ class _Main extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    bootstrap: function(users){
-      dispatch(loadUsers(users));
+    bootstrap: function(){
+      dispatch(loadUsers());
     }
   }
 }

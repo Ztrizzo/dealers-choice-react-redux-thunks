@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { backToConversations, goToConversation } from './store';
-import axios from 'axios';
-import faker from 'faker';
+import { backToConversations, newMessage } from './store';
 
 const Conversation = (props) => {
   return(
@@ -34,16 +32,8 @@ const mapDispatchToProps = (dispatch) => {
     backToConversations: function(){
       dispatch(backToConversations());
     },
-    newMessage: async function(conversation, selectedUserId){
-      await axios.post(`/conversation/${conversation.id}`, {
-        selectedUser: selectedUserId,
-        message: faker.lorem.paragraph(1)
-      });
-
-      const newConversation = (await axios.get(`/conversation/${conversation.id}`)).data;
-
-      console.log(newConversation);
-      dispatch(goToConversation(newConversation[0]))
+    newMessage: function(conversation, selectedUserId){
+      dispatch(newMessage(conversation, selectedUserId))
     }
   }
 }
