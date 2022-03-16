@@ -42,3 +42,9 @@ body > div{
 .conversation:hover{
   background-color: rgb(160, 154, 154);
 }
+
+.deleteMessage{
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 3rem;
+}

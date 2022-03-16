@@ -9,6 +9,7 @@ const LOAD_USERS = 'LOAD_USERS';
 const LOGIN = 'LOGIN';
 const GO_TO_CONVERSATION = 'GO_TO_CONVERSATION';
 const BACK_TO_CONVERSATIONS = 'BACK_TO_CONVERSATIONS';
+const DELETE_MESSAGE = 'DELETE_MESSAGE';
 
 
 
@@ -36,11 +37,22 @@ export const newMessage = (conversation, selectedUserId) =>{
   }
 }
 
+export const deleteMessage = (messageId, conversationId) => {
+  return async(dispatch) => {
+    await axios.delete(`/message/${messageId}`);
+    const conversation = (await axios.get(`/conversation/${conversationId}`)).data[0];
+    dispatch({
+      type: DELETE_MESSAGE,
+      conversation: conversation
+    })
+  }
+}
+
 export const  goToConversation = (conversation) => {
   return{
         type: GO_TO_CONVERSATION,
-        view: 'conversation',
-        conversation: conversation
+        conversation: conversation,
+        view: 'conversation'
       }
 }
 
@@ -55,10 +67,7 @@ export const backToConversations = () => {
         conversations: conversations
       }
     )
-  // return{
-  //   type: BACK_TO_CONVERSATIONS,
-  //   view: 'logged in'
-  // }
+
   }
 }
 
@@ -119,9 +128,14 @@ const reducer = ( state = initialState, action ) => {
   }
   if(action.type === GO_TO_CONVERSATION){
     return {...state, view: action.view, conversation: action.conversation};
+
   }
   if(action.type === BACK_TO_CONVERSATIONS){
     return {...state, view: action.view};
+  }
+  if(action.type === DELETE_MESSAGE){
+    return{...state, conversation: action.conversation};
+    
   }
   return state;
 }

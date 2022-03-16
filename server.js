@@ -33,7 +33,6 @@ app.get('/conversation/:id', async(req, res, next) => {
       },
       include: [Message, User]
     });
-    console.log('this is convo: ', req.params.id);
     res.send(conversation);
   }
   catch(error){
@@ -59,24 +58,12 @@ app.get('/user/:id/conversations', async(req, res, next) => {
       include:[{
         model: Message,
         where: {
-          // senderId: req.params.id
           [Op.or]: [
             {receiverId: req.params.id},
             {senderId: req.params.id}
           ]
         }
-      }, User],
-      // where: {
-      //   // '$messages.receiverId$': req.params.id
-      //   [Op.or]: [
-      //     {'$messages.receiverId$': req.params.id},
-      //     {'createdAt': 10}
-      //   ]
-      //   // [Op.or]: [
-      //   //   {'$messages.receiverId$': req.params.id}
-      //   //   // {'$messages.senderId$': req.params.id}
-      //   // ]
-      // }
+      }, User]
     })
     res.send(conversations);
   }
@@ -112,6 +99,17 @@ app.post('/conversation/:id', async (req, res, next) => {
 
     
     res.send(conversation);
+  }
+  catch(error){
+    next(error);
+  }
+})
+
+app.delete('/message/:id', async(req, res, next) => {
+  try{
+    const message = await Message.findByPk(req.params.id);
+    message.destroy();
+    res.sendStatus(204);
   }
   catch(error){
     next(error);

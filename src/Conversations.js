@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { goToConversation , logout} from './store';
+import { goToConversation} from './store';
 
 const Conversations = (props) => {
   return (
     <div id='conversations'>
       <a href='/'><button>Logout</button></a>
       <h3>Conversation with:</h3>
+      
       {props.conversations.map((conversation) => {
         return (
         <div key={conversation.id} className='conversation' onClick={() => props.goToConversation(conversation)}>

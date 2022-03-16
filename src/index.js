@@ -8,26 +8,14 @@ import Conversation from './Conversation';
 
 
 class _Main extends React.Component{
-  constructor(){
-    super();
-    // this.state = {
-    //   users: [],
-    //   selectedUser: '',
-    //   view: 'login'
-    // }
-  }
+
 
   async componentDidMount(){
     
     this.props.bootstrap();
   }
-  
-  // login(){
-  //   this.setState({view:'conversations'});
-  // }
 
   render(){
-    // console.log(this.props)
     if(this.props.view === 'login'){
       return(
         <Login/>

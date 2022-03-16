@@ -47,10 +47,6 @@ Message.belongsTo(Conversation);
 Conversation.belongsToMany(User, {through: 'UserConversations'});
 User.belongsToMany(Conversation, {through: 'UserConversations'})
 
-// User.hasMany(Conversation);
-// Conversation.belongsToMany(User, {through: 'ConversationList'});
-
-
 const syncAndSeed = async () => {
   await sequelize.sync({force: true});
   
