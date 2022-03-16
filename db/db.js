@@ -1,6 +1,6 @@
 const {Sequelize, STRING, UUID, UUIDV4, TEXT} = require('sequelize');
 const faker = require('faker');
-const sequelize = new Sequelize(process.env.PORT || 'postgres://localhost/dealers-choice-react-redux-thunks');
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/dealers-choice-react-redux-thunks');
 
 const User = sequelize.define('user', {
   name: {
